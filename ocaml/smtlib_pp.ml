@@ -2,6 +2,12 @@
 
 open Smtlib_syntax;;
 
+let print_string, get_string =
+  let acc = Buffer.create 10000000 in
+  let print_string str = Buffer.add_string acc str in
+  let get_string () = let str = Buffer.contents acc in Buffer.reset acc; str in
+  print_string, get_string
+
 let rec dummy () = () 
 and pp_an_option = function 
    |AnOptionAttribute (_ , attribute1) ->  pp_attribute attribute1; () 
@@ -13,6 +19,7 @@ and pp_attributevalue = function
    |AttributeValSymbol (_ , symbol1) ->  pp_symbol symbol1; () 
    |AttributeValSexpr (_ , attributevalsexpr_attributevalue_sexpr52) ->  print_string "(";print_string " "; pp_attributevalsexpr_attributevalue_sexpr5 attributevalsexpr_attributevalue_sexpr52;print_string " "; print_string ")"; () 
 and pp_command = function 
+  | Comment (_, str) -> print_string (str ^ "\n")
    |CommandSetLogic (_ , symbol3) ->  print_string "(";print_string " "; print_string "set-logic";print_string " "; pp_symbol symbol3;print_string " "; print_string ")"; () 
    |CommandSetOption (_ , an_option3) ->  print_string "(";print_string " "; print_string "set-option";print_string " "; pp_an_option an_option3;print_string " "; print_string ")"; () 
    |CommandSetInfo (_ , attribute3) ->  print_string "(";print_string " "; print_string "set-info";print_string " "; pp_attribute attribute3;print_string " "; print_string ")"; () 

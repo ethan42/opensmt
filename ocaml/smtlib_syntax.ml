@@ -6,7 +6,7 @@ type dummy = Dummy
 and an_option = | AnOptionAttribute of pd * attribute
 and attribute = | AttributeKeyword of pd * string | AttributeKeywordValue of pd * string * attributevalue
 and attributevalue = | AttributeValSpecConst of pd * specconstant | AttributeValSymbol of pd * symbol | AttributeValSexpr of pd * attributevalsexpr_attributevalue_sexpr5
-and command = | CommandSetLogic of pd * symbol | CommandSetOption of pd * an_option | CommandSetInfo of pd * attribute | CommandDeclareSort of pd * symbol * string | CommandDefineSort of pd * symbol * commanddefinesort_command_symbol11 * sort | CommandDeclareFun of pd * symbol * commanddeclarefun_command_sort13 * sort | CommandDefineFun of pd * symbol * commanddefinefun_command_sortedvar15 * sort * term | CommandPush of pd * string | CommandPop of pd * string | CommandAssert of pd * term | CommandCheckSat of pd | CommandGetAssert of pd | CommandGetProof of pd | CommandGetUnsatCore of pd | CommandGetValue of pd * commandgetvalue_command_term24 | CommandGetAssign of pd | CommandGetOption of pd * string | CommandGetInfo of pd * infoflag | CommandExit of pd
+and command = Comment of pd * string | CommandSetLogic of pd * symbol | CommandSetOption of pd * an_option | CommandSetInfo of pd * attribute | CommandDeclareSort of pd * symbol * string | CommandDefineSort of pd * symbol * commanddefinesort_command_symbol11 * sort | CommandDeclareFun of pd * symbol * commanddeclarefun_command_sort13 * sort | CommandDefineFun of pd * symbol * commanddefinefun_command_sortedvar15 * sort * term | CommandPush of pd * string | CommandPop of pd * string | CommandAssert of pd * term | CommandCheckSat of pd | CommandGetAssert of pd | CommandGetProof of pd | CommandGetUnsatCore of pd | CommandGetValue of pd * commandgetvalue_command_term24 | CommandGetAssign of pd | CommandGetOption of pd * string | CommandGetInfo of pd * infoflag | CommandExit of pd
 and commands = | Commands of pd * commands_commands_command30
 and identifier = | IdSymbol of pd * symbol | IdUnderscoreSymNum of pd * symbol * idunderscoresymnum_identifier_numeral33
 and infoflag = | InfoFlagKeyword of pd * string
@@ -51,6 +51,7 @@ and pd_attributevalue = function
   | AttributeValSexpr(d,_) -> d
 
 and pd_command = function 
+  | Comment(d, _) -> d
   | CommandSetLogic(d,_) -> d
 
   | CommandSetOption(d,_) -> d

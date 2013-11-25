@@ -6,7 +6,7 @@ open Smtlib_parse;;
 
 rule token = parse
 | ['\t' ' ' ]+ { token lexbuf }
-| ';'  (_ # '\n')* { token lexbuf }
+| ';'  (_ # '\n')* as str { COMMENT str }
 | ['\n']+ as str { Smtlib_util.line := (!Smtlib_util.line + (String.length str)); token lexbuf }
 | "_" { UNDERSCORE }
 | "(" { LPAREN }
