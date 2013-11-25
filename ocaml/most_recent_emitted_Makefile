@@ -1,0 +1,2 @@
+all:
+	$(MAKE) -f smtlib_Makefile
